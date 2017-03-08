@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Train Time Table</title>
+	<meta charset="utf-8">
+	<meta name = "viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link rel="stylesheet" type="text/css" href="reset.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	
+</head>
+<body>
+<div class = "container">
+
+	<header class="jumbotron">
+		<h1>Train Time Table</h1>
+	</header>
+
+	
+	<div class = "row">
+		<div class = "col-sm-12 col-md-12">
+			<div class = "panel panel-primary">
+				<div class = "panel-heading">
+					<h3 class = "panel-title">Current Train Schedule</h3>	
+				</div>
+				<div class = "panel-body">
+
+					<table class = "table table-hover">
+					<thead>
+						<tr>
+							<th>Train Name</th>
+							<th>Destination</th>
+							<th>Frequency</th>
+							<th>Next Arrival</th>
+							<th>Minutes Away</th>
+						</tr>
+					</thead>
+
+					<tbody id = "tableDisplay">
+						
+					</tbody>	
+					</table>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "row">
+		<div class = "col-sm-12 col-md-12">
+			<div class = "panel panel-primary">
+				<div class = "panel-heading">
+					<h3 class = "panel-title">Add Trains</h3>	
+				</div>
+				<div class = "panel-body">
+					<form id="addTrain">
+						<label>Train Name</label>
+						<br>
+						<input type="text" class="form-control" id="add-train-name">
+						<br>
+						<label>Destination</label>
+						<br>
+						<input type="text" class="form-control" id="add-destination">
+						<br>
+						<label>First Train Time(military time)</label>
+						<br>
+						<input type="text" class="form-control" id="add-first-train-time">
+						<br>
+						<label>Frequency</label>
+						<br>
+						<input type="text" class="form-control" id="add-frequency">
+						<br>
+						<button type="button" class="btn btn-primary" id = "submit-details">
+						Submit
+						</button>
+					</form>	
+				</div>
+			</div>
+		
+		</div>
+	</div>
+	
+
+	<footer>
+   		 <center><span>Aparna</span></center>
+	</footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script>
+
+
+</body>
+
+</html>

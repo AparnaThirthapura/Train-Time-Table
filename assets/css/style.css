@@ -1,0 +1,18 @@
+body{
+	background-color: HoneyDew;
+}
+
+.jumbotron{
+	background-color: CornflowerBlue;
+	text-align:center;
+}
+
+.panel-primary > .panel-heading, footer, #submit{
+	background-color: CornflowerBlue;
+	color:black;
+}
+
+.tableDisplayRows{
+	
+}
+
