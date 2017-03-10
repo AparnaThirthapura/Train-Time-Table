@@ -12,7 +12,6 @@ body{
 	color:black;
 }
 
-.tableDisplayRows{
-	
+tbody:hover{
+	background-color: lightblue;
 }
-

@@ -25,24 +25,53 @@ $("#submit-details").on("click", function(event){
 	firstTrainTime = $("#add-first-train-time").val().trim();
 	trainFrequency = $("#add-frequency").val().trim();
 
-	database.ref().push({
-		trainName:trainName,
-		trainDestination:trainDestination,
-		firstTrainTime:firstTrainTime,
-		trainFrequency:trainFrequency
-	});
+	// if(trainName === "" || trainDestination === "" ||firstTrainTime === "" || trainFrequency === ""){
+	// 	alert("enter all the fields");
+	// 	return;
+	// }
+	
+	$("#addTrain").validate({
+//specify the validation rules
+		rules: {
+			trainName: "required",
+			trainDestination: "required",
+			firstTrainTime: "required",
+			trainFrequency: "required"
+		
+		},
+		 
+		//specify validation error messages
+		messages: {
+			trainName: "Enter a train name"
+		},
+		 
+		submitHandler: function(form){
+			console.log(form);
+			form.submit();
+		}
+		 
+		});
 
-	console.log(trainName);
-	console.log(trainDestination);
-	console.log(firstTrainTime);
-	console.log(trainFrequency);
+		database.ref("/TrainTimeTableInfo").push({
+			trainName:trainName,
+			trainDestination:trainDestination,
+			firstTrainTime:firstTrainTime,
+			trainFrequency:trainFrequency
+		});
+
+		console.log(trainName);
+		console.log(trainDestination);
+		console.log(firstTrainTime);
+		console.log(trainFrequency);
+	
+	
 
 	$("input").val(" ");
 	return false;
 
 });
 
-database.ref().on("child_added", function(childSnapshot){
+database.ref("/TrainTimeTableInfo").on("child_added", function(childSnapshot){
 	//Pull the data from the database
 	// alert("Hi");
 	var trainName = childSnapshot.val().trainName;
@@ -63,9 +92,9 @@ database.ref().on("child_added", function(childSnapshot){
 	console.log(timeRemaining);
 	console.log(minutesRemainingForNextTrain);
 	console.log(nextTrainTime);
-	console.log("DESTINATION:" + childSnapshot.val().trainDestination);
+	// console.log("DESTINATION:" + childSnapshot.val().trainDestination);
 
-	$("#tableDisplay").append("<tr class = \"tableDisplayRows \">");
+	$("#tableDisplay").append("<tr>").attr("class", "tableDisplayRows");
 	$("#tableDisplay").append("<td> " + trainName + "</td>" +
         " <td> " + trainDestination + "</td>" +
         " <td> " + trainFrequency + "</td>" +
@@ -79,28 +108,3 @@ database.ref().on("child_added", function(childSnapshot){
 });
 
 
-/* Calculating Next Arrival Time and Minutes Remaining 
-
---Variables required--
-trainFrequency
-firstTrainTime
-currentTime
-
-firstTrainTimeConverted = moment(firstTrainTime, "hh:mm".subtract(1,"years"));
-currentTime = moment().format("hh:mm");
-
-timeDiff = moment().diff(moment(firstTrainTimeConverted), "minutes");
-
-timeRemainder = timeDiff % trainFrequency;
-
-minutesRemainingForNextTrain = trainFrequency - timeRemainder; 
-nextTrainTime = moment().add(minutesRemainingForNextTrain, "minutes");
-
-console.log(firstTrainTimeConverted);
-console.log(currentTime);
-console.log(timeDiff);
-console.log(timeRemainder);
-console.log(minutesRemainingForNextTrain);
-console.log(nextTrainTime);
-
-*/
