@@ -16,7 +16,23 @@
 		<h1>Train Time Table</h1>
 	</header>
 
-	
+<form>
+
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required id = "email">
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required id = "password">
+
+    <button type="submit" id = "submitBtn">Login</button>
+ 
+  </div>
+  <br>
+
+</form>
+
+
 	<div class = "row">
 		<div class = "col-sm-12 col-md-12">
 			<div class = "panel panel-primary">
@@ -67,7 +83,7 @@
 
 							<p>
 								<label for="add-first-train-time">First Train Time(military time)</label>
-								<input type="time" class="form-control" id="add-first-train-time" required>
+								<input type="text" class="form-control" id="add-first-train-time" required>
 							</p>
 
 							<p>
@@ -92,7 +108,7 @@
 	</footer>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>

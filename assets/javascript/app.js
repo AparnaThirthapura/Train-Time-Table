@@ -1,12 +1,12 @@
-
+//Firebase configuration
 var config = {
-	apiKey: "AIzaSyCVNOQ6YMgchTveUPP2TC0jMtD0wQn8w0E",
-	authDomain: "train-time-table-hw.firebaseapp.com",
-	databaseURL: "https://train-time-table-hw.firebaseio.com",
-	storageBucket: "train-time-table-hw.appspot.com",
-	messagingSenderId: "1044606974577"
-};
-firebase.initializeApp(config);
+    apiKey: "AIzaSyCVNOQ6YMgchTveUPP2TC0jMtD0wQn8w0E",
+    authDomain: "train-time-table-hw.firebaseapp.com",
+    databaseURL: "https://train-time-table-hw.firebaseio.com",
+    storageBucket: "train-time-table-hw.appspot.com",
+    messagingSenderId: "1044606974577"
+  };
+  firebase.initializeApp(config);
 
 var database = firebase.database();
 
@@ -15,6 +15,29 @@ var trainDestination = " ";
 var firstTrainTime = " ";
 var trainFrequency = " ";
 
+var email = " ";
+var pass = " ";
+
+$("#submitBtn").on("click", function(event){
+
+		event.preventDefault();
+
+	email = $("#email").val().trim();
+	pass = $("#password").val().trim();
+
+	firebase.auth().createUserWithEmailAndPassword(email,pass).catch(function(error) {
+  // Handle Errors here.
+  		var errorCode = error.code;
+ 	 	var errorMessage = error.message;
+ 	 	alert("Inside auth code" + email);
+ 	 	console.log(email);
+
+ 	 	$("input").val(" ");
+		return false;
+  // ...
+});
+
+});
 //On clicking submit button
 $("#submit-details").on("click", function(event){
 
@@ -25,32 +48,31 @@ $("#submit-details").on("click", function(event){
 	firstTrainTime = $("#add-first-train-time").val().trim();
 	trainFrequency = $("#add-frequency").val().trim();
 
-	// if(trainName === "" || trainDestination === "" ||firstTrainTime === "" || trainFrequency === ""){
-	// 	alert("enter all the fields");
-	// 	return;
-	// }
+	if(trainName === "" || trainDestination === "" ||firstTrainTime === "" || trainFrequency === ""){
+	  alert("enter all the fields");
+	  return;
+    }
+
+    var fields = firstTrainTime.split(':');
+    if (fields.length != 2) {
+    	alert("First train time should be of the format HH:MM");
+    	return;
+    }
+
+    if (fields[0] < 0 || fields[0] > 23) {
+    	alert("Hour should be a number between 0 and 23.");
+    	return;
+    }
+
+    if (fields[1] < 0 || fields[1] > 59) {
+    	alert("Minutes should be between 0 and 59.");
+    	return;
+    }
 	
-	$("#addTrain").validate({
-//specify the validation rules
-		rules: {
-			trainName: "required",
-			trainDestination: "required",
-			firstTrainTime: "required",
-			trainFrequency: "required"
-		
-		},
-		 
-		//specify validation error messages
-		messages: {
-			trainName: "Enter a train name"
-		},
-		 
-		submitHandler: function(form){
-			console.log(form);
-			form.submit();
-		}
-		 
-		});
+	if(! $.isNumeric(trainFrequency)){
+		alert("Train frequency should be a number");
+		return;
+	}
 
 		database.ref("/TrainTimeTableInfo").push({
 			trainName:trainName,
@@ -92,15 +114,15 @@ database.ref("/TrainTimeTableInfo").on("child_added", function(childSnapshot){
 	console.log(timeRemaining);
 	console.log(minutesRemainingForNextTrain);
 	console.log(nextTrainTime);
-	// console.log("DESTINATION:" + childSnapshot.val().trainDestination);
 
-	$("#tableDisplay").append("<tr>").attr("class", "tableDisplayRows");
-	$("#tableDisplay").append("<td> " + trainName + "</td>" +
+	var tableRow = $("<tr>").attr("class", "tableDisplayRows");
+	tableRow.appendTo("#tableDisplay");
+	tableRow.append("<td> " + trainName + "</td>" +
         " <td> " + trainDestination + "</td>" +
         " <td> " + trainFrequency + "</td>" +
         " <td> " + moment(nextTrainTime).format("hh:mm") + "</td>" +
         " <td> " + minutesRemainingForNextTrain + "</td>");
-	$("#tableDisplay").append("</tr>");
+
 
 
 }, function(errorObject){
