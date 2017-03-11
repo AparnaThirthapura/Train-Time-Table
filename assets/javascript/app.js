@@ -15,29 +15,29 @@ var trainDestination = " ";
 var firstTrainTime = " ";
 var trainFrequency = " ";
 
-var email = " ";
-var pass = " ";
+// var email = " ";
+// var pass = " ";
 
-$("#submitBtn").on("click", function(event){
+// $("#submitBtn").on("click", function(event){
 
-		event.preventDefault();
+// 		event.preventDefault();
 
-	email = $("#email").val().trim();
-	pass = $("#password").val().trim();
+// 	email = $("#email").val().trim();
+// 	pass = $("#password").val().trim();
 
-	firebase.auth().createUserWithEmailAndPassword(email,pass).catch(function(error) {
-  // Handle Errors here.
-  		var errorCode = error.code;
- 	 	var errorMessage = error.message;
- 	 	alert("Inside auth code" + email);
- 	 	console.log(email);
+// 	firebase.auth().createUserWithEmailAndPassword(email,pass).catch(function(error) {
+//   // Handle Errors here.
+//   		var errorCode = error.code;
+//  	 	var errorMessage = error.message;
+//  	 	alert("Inside auth code" + email);
+//  	 	console.log(email);
 
- 	 	$("input").val(" ");
-		return false;
-  // ...
-});
+//  	 	$("input").val(" ");
+// 		return false;
+//   // ...
+// });
 
-});
+// });
 //On clicking submit button
 $("#submit-details").on("click", function(event){
 
