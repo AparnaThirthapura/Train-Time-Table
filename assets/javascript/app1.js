@@ -1,4 +1,3 @@
-//Firebase configuration
 var config = {
     apiKey: "AIzaSyCVNOQ6YMgchTveUPP2TC0jMtD0wQn8w0E",
     authDomain: "train-time-table-hw.firebaseapp.com",
@@ -15,60 +14,44 @@ var trainDestination = " ";
 var firstTrainTime = " ";
 var trainFrequency = " ";
 
-//On clicking submit button
-$("#submit-details").on("click", function(event){
+function accessDatabase(){
 
-	event.preventDefault();
-
-	trainName = $("#add-train-name").val().trim();
-	trainDestination = $("#add-destination").val().trim();
-	firstTrainTime = $("#add-first-train-time").val().trim();
-	trainFrequency = $("#add-frequency").val().trim();
-
-	if(trainName === "" || trainDestination === "" ||firstTrainTime === "" || trainFrequency === ""){
-	  alert("enter all the fields");
-	  return;
-    }
-
-    var fields = firstTrainTime.split(':');
-    if (fields.length != 2) {
-    	alert("First train time should be of the format HH:MM");
-    	return;
-    }
-
-    if (fields[0] < 0 || fields[0] > 23) {
-    	alert("Hour should be a number between 0 and 23.");
-    	return;
-    }
-
-    if (fields[1] < 0 || fields[1] > 59) {
-    	alert("Minutes should be between 0 and 59.");
-    	return;
-    }
-	
-	if(! $.isNumeric(trainFrequency)){
-		alert("Train frequency should be a number");
-		return;
-	}
-
-		database.ref("/TrainTimeTableInfo").push({
+	database.ref("/TrainTimeTableInfo").push({
 			trainName:trainName,
 			trainDestination:trainDestination,
 			firstTrainTime:firstTrainTime,
 			trainFrequency:trainFrequency
 		});
+}
 
-		console.log(trainName);
-		console.log(trainDestination);
-		console.log(firstTrainTime);
-		console.log(trainFrequency);
-	
-	
-
-	$("input").val(" ");
-	return false;
-
+$("#addTrain").validate({
+//specify the validation rules
+	rules: {
+		trainName: "required",
+		trainDestination: "required",
+		trainTime: {
+			required: true
+		},
+		trainFrequency: "required",
+	},
+	 
+	//specify validation error messages
+	messages: {
+		trainName: "First Name field cannot be blank!",
+		trainDestination: "Last Name field cannot be blank!",
+		trainTime: {
+			required: "Password field cannot be blank!",
+		},
+		trainFrequency: "Something"
+	},
+	 
+	submitHandler: function(form){
+		
+		form.submit();
+	}
+	 
 });
+
 
 database.ref("/TrainTimeTableInfo").on("child_added", function(childSnapshot){
 	//Pull the data from the database

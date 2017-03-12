@@ -78,23 +78,21 @@
 
 							<p>
 								<label for="add-destination">Destination</label>
-								<input type="text" class="form-control" id="add-destination" required data-validation = "length alphanumeric" data-validation-length = "min4">
+								<input type="text" class="form-control" name="trainDestination" id="add-destination" required data-validation = "length alphanumeric" data-validation-length = "min4">
 							</p>
 
 							<p>
 								<label for="add-first-train-time">First Train Time(military time)</label>
-								<input type="text" class="form-control" id="add-first-train-time" required>
+								<input type="text" class="form-control" name="trainTime" id="add-first-train-time" required>
 							</p>
 
 							<p>
 								<label for="add-frequency">Frequency</label>
-								<input type="text" class="form-control" id="add-frequency" required>
+								<input type="text" class="form-control" name="trainFrequency" id="add-frequency" required>
 							</p>
 
-								<button type="button" class="btn btn-primary" id = "submit-details">
-								Submit
-								</button>
-					</fieldset>
+								<button type="button" class="btn btn-primary" id = "submit-details">Submit</button>	
+						</fieldset>
 					</form>	
 				</div>
 			</div>
@@ -113,6 +111,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="assets/javascript/app.js"></script>
+<!-- <script type="text/javascript" src="assets/javascript/app1.js"></script> -->
 
 
 </body>
